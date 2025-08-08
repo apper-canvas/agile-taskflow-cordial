@@ -94,17 +94,27 @@ const taskService = {
 
   async create(taskData) {
     try {
+// Initialize ApperClient with Project ID and Public Key
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+      
       const params = {
         records: [
           {
-            title: taskData.title,
-            completed: taskData.completed || false,
-            category_id: parseInt(taskData.categoryId) || parseInt(taskData.category_id) || null,
-            priority: taskData.priority || 'medium',
-            due_date: taskData.dueDate || taskData.due_date || null,
-            created_at: taskData.createdAt || taskData.created_at || new Date().toISOString(),
-            completed_at: taskData.completedAt || taskData.completed_at || null,
-            order: taskData.order !== undefined ? taskData.order : 0
+            // Only include Updateable fields for create operation
+            Name: taskData.name || taskData.Name || taskData.title || '',
+            Tags: taskData.tags || taskData.Tags || '',
+            title_c: taskData.title || taskData.title_c,
+            completed_c: taskData.completed !== undefined ? taskData.completed : (taskData.completed_c !== undefined ? taskData.completed_c : false),
+            category_id_c: parseInt(taskData.categoryId) || parseInt(taskData.category_id) || parseInt(taskData.category_id_c) || null,
+            priority_c: taskData.priority || taskData.priority_c || 'medium',
+            due_date_c: taskData.dueDate || taskData.due_date || taskData.due_date_c || null,
+            created_at_c: taskData.createdAt || taskData.created_at || taskData.created_at_c || new Date().toISOString(),
+            completed_at_c: taskData.completedAt || taskData.completed_at || taskData.completed_at_c || null,
+            order_c: taskData.order !== undefined ? taskData.order : (taskData.order_c !== undefined ? taskData.order_c : 0)
           }
         ]
       };
@@ -139,20 +149,33 @@ const taskService = {
     try {
       const params = {
         records: [
-          {
+{
             Id: parseInt(id),
-            ...(updateData.title !== undefined && { title: updateData.title }),
-            ...(updateData.completed !== undefined && { completed: updateData.completed }),
-            ...(updateData.categoryId !== undefined && { category_id: parseInt(updateData.categoryId) }),
-            ...(updateData.category_id !== undefined && { category_id: parseInt(updateData.category_id) }),
-            ...(updateData.priority !== undefined && { priority: updateData.priority }),
-            ...(updateData.dueDate !== undefined && { due_date: updateData.dueDate }),
-            ...(updateData.due_date !== undefined && { due_date: updateData.due_date }),
-            ...(updateData.createdAt !== undefined && { created_at: updateData.createdAt }),
-            ...(updateData.created_at !== undefined && { created_at: updateData.created_at }),
-            ...(updateData.completedAt !== undefined && { completed_at: updateData.completedAt }),
-            ...(updateData.completed_at !== undefined && { completed_at: updateData.completed_at }),
-            ...(updateData.order !== undefined && { order: updateData.order })
+            // Only include Updateable fields for update operation
+            ...(updateData.name !== undefined && { Name: updateData.name }),
+            ...(updateData.Name !== undefined && { Name: updateData.Name }),
+            ...(updateData.tags !== undefined && { Tags: updateData.tags }),
+            ...(updateData.Tags !== undefined && { Tags: updateData.Tags }),
+            ...(updateData.title !== undefined && { title_c: updateData.title }),
+            ...(updateData.title_c !== undefined && { title_c: updateData.title_c }),
+            ...(updateData.completed !== undefined && { completed_c: updateData.completed }),
+            ...(updateData.completed_c !== undefined && { completed_c: updateData.completed_c }),
+            ...(updateData.categoryId !== undefined && { category_id_c: parseInt(updateData.categoryId) }),
+            ...(updateData.category_id !== undefined && { category_id_c: parseInt(updateData.category_id) }),
+            ...(updateData.category_id_c !== undefined && { category_id_c: parseInt(updateData.category_id_c) }),
+            ...(updateData.priority !== undefined && { priority_c: updateData.priority }),
+            ...(updateData.priority_c !== undefined && { priority_c: updateData.priority_c }),
+            ...(updateData.dueDate !== undefined && { due_date_c: updateData.dueDate }),
+            ...(updateData.due_date !== undefined && { due_date_c: updateData.due_date }),
+            ...(updateData.due_date_c !== undefined && { due_date_c: updateData.due_date_c }),
+            ...(updateData.createdAt !== undefined && { created_at_c: updateData.createdAt }),
+            ...(updateData.created_at !== undefined && { created_at_c: updateData.created_at }),
+            ...(updateData.created_at_c !== undefined && { created_at_c: updateData.created_at_c }),
+            ...(updateData.completedAt !== undefined && { completed_at_c: updateData.completedAt }),
+            ...(updateData.completed_at !== undefined && { completed_at_c: updateData.completed_at }),
+            ...(updateData.completed_at_c !== undefined && { completed_at_c: updateData.completed_at_c }),
+            ...(updateData.order !== undefined && { order_c: updateData.order }),
+            ...(updateData.order_c !== undefined && { order_c: updateData.order_c })
           }
         ]
       };

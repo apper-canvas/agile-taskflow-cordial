@@ -73,14 +73,23 @@ const categoryService = {
   },
 
   async create(categoryData) {
-    try {
+try {
+      // Initialize ApperClient with Project ID and Public Key
+      const { ApperClient } = window.ApperSDK;
+      const apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+      
       const params = {
         records: [
           {
+            // Only include Updateable fields for create operation
             Name: categoryData.name || categoryData.Name,
-            color: categoryData.color || '#5B4EE5',
-            task_count: categoryData.task_count || categoryData.taskCount || 0,
-            order: categoryData.order !== undefined ? categoryData.order : 0
+            Tags: categoryData.tags || categoryData.Tags || '',
+            color_c: categoryData.color || categoryData.color_c || '#5B4EE5',
+            task_count_c: categoryData.task_count || categoryData.taskCount || categoryData.task_count_c || 0,
+            order_c: categoryData.order !== undefined ? categoryData.order : (categoryData.order_c !== undefined ? categoryData.order_c : 0)
           }
         ]
       };
@@ -116,13 +125,19 @@ const categoryService = {
       const params = {
         records: [
           {
-            Id: parseInt(id),
+Id: parseInt(id),
+            // Only include Updateable fields for update operation
             ...(updateData.name !== undefined && { Name: updateData.name }),
             ...(updateData.Name !== undefined && { Name: updateData.Name }),
-            ...(updateData.color !== undefined && { color: updateData.color }),
-            ...(updateData.task_count !== undefined && { task_count: updateData.task_count }),
-            ...(updateData.taskCount !== undefined && { task_count: updateData.taskCount }),
-            ...(updateData.order !== undefined && { order: updateData.order })
+            ...(updateData.tags !== undefined && { Tags: updateData.tags }),
+            ...(updateData.Tags !== undefined && { Tags: updateData.Tags }),
+            ...(updateData.color !== undefined && { color_c: updateData.color }),
+            ...(updateData.color_c !== undefined && { color_c: updateData.color_c }),
+            ...(updateData.task_count !== undefined && { task_count_c: updateData.task_count }),
+            ...(updateData.taskCount !== undefined && { task_count_c: updateData.taskCount }),
+            ...(updateData.task_count_c !== undefined && { task_count_c: updateData.task_count_c }),
+            ...(updateData.order !== undefined && { order_c: updateData.order }),
+            ...(updateData.order_c !== undefined && { order_c: updateData.order_c })
           }
         ]
       };

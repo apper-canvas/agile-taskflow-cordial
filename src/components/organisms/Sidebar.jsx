@@ -96,9 +96,10 @@ const Sidebar = ({ tasks, categories, selectedCategory, onSelectCategory, comple
 
                     {categories.map((category) => (
                         <CategoryButton
-                            key={category.Id || category.id}
+key={category.Id || category.id}
                             category={category}
                             count={tasks.filter(t => 
+                              (t.category_id_c?.toString() === ((category.Id || category.id)?.toString())) ||
                               (t.category_id?.toString() === ((category.Id || category.id)?.toString())) ||
                               (t.categoryId?.toString() === ((category.Id || category.id)?.toString()))
                             ).length}

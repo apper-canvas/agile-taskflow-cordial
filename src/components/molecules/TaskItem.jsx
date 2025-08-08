@@ -5,13 +5,13 @@ import Checkbox from '@/components/atoms/Checkbox';
 import Button from '@/components/atoms/Button';
 
 const TaskItem = ({ task, categories, onToggleComplete, onDelete, getPriorityColor, getCategoryColor, getDueDateDisplay, index }) => {
-const dueDateInfo = getDueDateDisplay(task.due_date || task.dueDate);
+const dueDateInfo = getDueDateDisplay(task.due_date_c || task.due_date || task.dueDate);
     const categoryName = categories.find(c => 
-      (c.Id?.toString() === (task.category_id?.toString() || task.categoryId?.toString())) ||
-      (c.id?.toString() === (task.category_id?.toString() || task.categoryId?.toString()))
+      (c.Id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString())) ||
+      (c.id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString()))
     )?.Name || categories.find(c => 
-      (c.Id?.toString() === (task.category_id?.toString() || task.categoryId?.toString())) ||
-      (c.id?.toString() === (task.category_id?.toString() || task.categoryId?.toString()))
+      (c.Id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString())) ||
+      (c.id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString()))
     )?.name;
 
     return (
@@ -27,7 +27,7 @@ const dueDateInfo = getDueDateDisplay(task.due_date || task.dueDate);
         >
             <div className="flex items-center space-x-4">
                 {/* Checkbox */}
-                <Checkbox checked={task.completed} onClick={() => onToggleComplete(task.id, !task.completed)} />
+<Checkbox checked={task.completed_c || task.completed} onClick={() => onToggleComplete(task.Id || task.id, !(task.completed_c || task.completed))} />
 
                 {/* Task Content */}
                 <div className="flex-1 min-w-0">
@@ -49,7 +49,7 @@ const dueDateInfo = getDueDateDisplay(task.due_date || task.dueDate);
                         {categoryName && (
 <div 
                                 className="px-2 py-1 rounded-full text-white text-xs font-medium"
-                                style={{ backgroundColor: getCategoryColor(task.category_id || task.categoryId) }}
+style={{ backgroundColor: getCategoryColor(task.category_id_c || task.category_id || task.categoryId) }}
                             >
                                 {categoryName}
                             </div>
@@ -69,7 +69,7 @@ const dueDateInfo = getDueDateDisplay(task.due_date || task.dueDate);
 
                 {/* Actions */}
                 <Button
-                    onClick={() => onDelete(task.id)}
+onClick={() => onDelete(task.Id || task.id)}
                     className="p-2 text-gray-400 hover:text-error transition-colors"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}

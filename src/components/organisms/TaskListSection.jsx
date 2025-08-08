@@ -1,8 +1,8 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
-import Button from '@/components/atoms/Button';
-import TaskItem from '@/components/molecules/TaskItem';
+import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import TaskItem from "@/components/molecules/TaskItem";
 
 const TaskListSection = ({ 
     filteredTasks, 
@@ -57,12 +57,12 @@ const TaskListSection = ({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="space-y-3"
+className="space-y-3"
                     >
                         {filteredTasks.map((task, index) => (
                             <TaskItem
                                 key={task.id}
                                 task={task}
-                                categories={categories}
                                 onToggleComplete={onToggleTaskComplete}
                                 onDelete={onDeleteTask}
                                 getPriorityColor={getPriorityColor}

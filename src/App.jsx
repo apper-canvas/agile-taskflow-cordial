@@ -45,8 +45,9 @@ function AppContent() {
         // DO NOT simplify or modify this pattern as it ensures proper redirection flow
         let currentPath = window.location.pathname + window.location.search;
         let redirectPath = new window.URLSearchParams(window.location.search).get('redirect');
-        const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup') || 
-                           currentPath.includes('/callback') || currentPath.includes('/error');
+const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup') || 
+                           currentPath.includes('/callback') || currentPath.includes('/error') || 
+                           currentPath.includes('/prompt-password') || currentPath.includes('/reset-password');
         if (user) {
           // User is authenticated
           if (redirectPath) {

@@ -50,7 +50,7 @@ const HomePage = () => {
 
 const handleTaskComplete = async (taskId, completed) => {
     try {
-      const updatedTask = await taskService.update(taskId, { completed });
+      const updatedTask = await taskService.update(taskId, { completed_c: completed });
       setTasks(prev => prev.map(task => 
         (task.Id || task.id) === taskId ? updatedTask : task
       ));
@@ -70,11 +70,11 @@ const handleCreateTask = async (e) => {
     e.preventDefault();
     if (!newTask.title.trim()) return;
 
-    try {
+try {
       const task = await taskService.create({
         ...newTask,
-        categoryId: newTask.categoryId,
-        dueDate: newTask.dueDate ? new Date(newTask.dueDate).toISOString() : null
+        category_id_c: newTask.categoryId,
+        due_date_c: newTask.dueDate ? new Date(newTask.dueDate).toISOString() : null
       });
       setTasks(prev => [...prev, task]);
       setNewTask({ title: '', categoryId: 'work', priority: 'medium', dueDate: '' });
@@ -104,6 +104,7 @@ const handleDeleteTask = async (taskId) => {
 
 if (selectedCategory !== 'all') {
       filtered = filtered.filter(task => 
+        task.category_id_c?.toString() === selectedCategory || 
         task.category_id?.toString() === selectedCategory || 
         task.categoryId?.toString() === selectedCategory
       );
@@ -140,10 +141,10 @@ if (selectedCategory !== 'all') {
 };
 
 const getCategoryColor = (categoryId) => {
-    const category = categories.find(c => 
+const category = categories.find(c => 
       (c.Id?.toString() || c.id?.toString()) === categoryId?.toString()
     );
-    return category?.color || '#5B4EE5';
+    return category?.color_c || category?.color || '#5B4EE5';
   };
 
   const getDueDateDisplay = (dueDate) => {
