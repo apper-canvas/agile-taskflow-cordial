@@ -4,7 +4,7 @@ import Button from '@/components/atoms/Button';
 const CategoryButton = ({ category, count, isSelected, onClick }) => {
     return (
         <Button
-            onClick={() => onClick(category.id)}
+onClick={() => onClick(category.Id || category.id)}
             className={`w-full flex items-center justify-between p-3 rounded-lg transition-all 
                 ${isSelected 
                     ? 'bg-primary text-white shadow-md' 
@@ -16,7 +16,7 @@ const CategoryButton = ({ category, count, isSelected, onClick }) => {
 <div className="flex items-center space-x-3">
                 <div 
                     className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: category.color || '#5B4EE5' }}
+style={{ backgroundColor: category.color_c || category.color || '#5B4EE5' }}
                 ></div>
 <span className="font-medium">{category.Name || category.name}</span>
             </div>

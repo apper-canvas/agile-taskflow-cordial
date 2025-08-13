@@ -32,15 +32,15 @@ const dueDateInfo = getDueDateDisplay(task.due_date_c || task.due_date || task.d
                 {/* Task Content */}
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-3 mb-2">
-                        <h4 className={`text-sm font-medium ${
-                            task.completed ? 'line-through text-gray-500' : 'text-gray-900'
-                        }`}>
+<h4 className={`text-sm font-medium ${
+(task.completed_c || task.completed) ? 'line-through text-gray-500' : 'text-gray-900'
+}`}>
                             {task.title}
                         </h4>
                         
                         {/* Priority Badge */}
-                        <div className={`w-2 h-2 rounded-full ${getPriorityColor(task.priority)} ${
-                            task.priority === 'high' && !task.completed ? 'animate-pulse-soft' : ''
+<div className={`w-2 h-2 rounded-full ${getPriorityColor(task.priority_c || task.priority)} ${
+(task.priority_c || task.priority) === 'high' && !(task.completed_c || task.completed) ? 'animate-pulse-soft' : ''
                         }`} />
                     </div>
 

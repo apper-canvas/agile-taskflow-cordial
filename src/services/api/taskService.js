@@ -9,56 +9,66 @@ const taskService = {
   async getAll() {
     try {
       const params = {
-        "Fields": [
-          {
-            "Field": {
-              "Name": "Id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "title"
-            }
-          },
-          {
-            "Field": {
-              "Name": "completed"
-            }
-          },
-          {
-            "Field": {
-              "Name": "category_id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "priority"
-            }
-          },
-          {
-            "Field": {
-              "Name": "due_date"
-            }
-          },
-          {
-            "Field": {
-              "Name": "created_at"
-            }
-          },
-          {
-            "Field": {
-              "Name": "completed_at"
-            }
-          },
-          {
-            "Field": {
-              "Name": "order"
-            }
-          }
-        ]
+"fields": [
+{
+"field": {
+"Name": "Id"
+}
+},
+{
+"field": {
+"Name": "Name"
+}
+},
+{
+"field": {
+"Name": "Tags"
+}
+},
+{
+"field": {
+"Name": "title_c"
+}
+},
+{
+"field": {
+"Name": "completed_c"
+}
+},
+{
+"field": {
+"Name": "category_id_c"
+}
+},
+{
+"field": {
+"Name": "priority_c"
+}
+},
+{
+"field": {
+"Name": "due_date_c"
+}
+},
+{
+"field": {
+"Name": "created_at_c"
+}
+},
+{
+"field": {
+"Name": "completed_at_c"
+}
+},
+{
+"field": {
+"Name": "order_c"
+}
+}
+]
       };
       
-      const response = await apperClient.fetchRecords('task', params);
+const response = await apperClient.fetchRecords('task_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -75,10 +85,66 @@ const taskService = {
   async getById(id) {
     try {
       const params = {
-        fields: ['Id', 'title', 'completed', 'category_id', 'priority', 'due_date', 'created_at', 'completed_at', 'order']
+fields: [
+{
+"field": {
+"Name": "Id"
+}
+},
+{
+"field": {
+"Name": "Name"
+}
+},
+{
+"field": {
+"Name": "Tags"
+}
+},
+{
+"field": {
+"Name": "title_c"
+}
+},
+{
+"field": {
+"Name": "completed_c"
+}
+},
+{
+"field": {
+"Name": "category_id_c"
+}
+},
+{
+"field": {
+"Name": "priority_c"
+}
+},
+{
+"field": {
+"Name": "due_date_c"
+}
+},
+{
+"field": {
+"Name": "created_at_c"
+}
+},
+{
+"field": {
+"Name": "completed_at_c"
+}
+},
+{
+"field": {
+"Name": "order_c"
+}
+}
+]
       };
       
-      const response = await apperClient.getRecordById('task', id, params);
+const response = await apperClient.getRecordById('task_c', id, params);
       
       if (!response.success) {
         console.error(response.message);
@@ -119,7 +185,7 @@ const taskService = {
         ]
       };
       
-      const response = await apperClient.createRecord('task', params);
+const response = await apperClient.createRecord('task_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -181,13 +247,13 @@ const taskService = {
       };
       
       // Handle completion timestamp logic
-      if (updateData.completed && !updateData.completed_at && !updateData.completedAt) {
-        params.records[0].completed_at = new Date().toISOString();
-      } else if (updateData.completed === false) {
-        params.records[0].completed_at = null;
-      }
+if (updateData.completed && !updateData.completed_at && !updateData.completedAt) {
+params.records[0].completed_at_c = new Date().toISOString();
+} else if (updateData.completed === false) {
+params.records[0].completed_at_c = null;
+}
       
-      const response = await apperClient.updateRecord('task', params);
+const response = await apperClient.updateRecord('task_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -219,7 +285,7 @@ const taskService = {
         RecordIds: [parseInt(id)]
       };
       
-      const response = await apperClient.deleteRecord('task', params);
+const response = await apperClient.deleteRecord('task_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -257,63 +323,73 @@ const taskService = {
   async getByCategory(categoryId) {
     try {
       const params = {
-        "Fields": [
-          {
-            "Field": {
-              "Name": "Id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "title"
-            }
-          },
-          {
-            "Field": {
-              "Name": "completed"
-            }
-          },
-          {
-            "Field": {
-              "Name": "category_id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "priority"
-            }
-          },
-          {
-            "Field": {
-              "Name": "due_date"
-            }
-          },
-          {
-            "Field": {
-              "Name": "created_at"
-            }
-          },
-          {
-            "Field": {
-              "Name": "completed_at"
-            }
-          },
-          {
-            "Field": {
-              "Name": "order"
-            }
-          }
-        ],
+"fields": [
+{
+"field": {
+"Name": "Id"
+}
+},
+{
+"field": {
+"Name": "Name"
+}
+},
+{
+"field": {
+"Name": "Tags"
+}
+},
+{
+"field": {
+"Name": "title_c"
+}
+},
+{
+"field": {
+"Name": "completed_c"
+}
+},
+{
+"field": {
+"Name": "category_id_c"
+}
+},
+{
+"field": {
+"Name": "priority_c"
+}
+},
+{
+"field": {
+"Name": "due_date_c"
+}
+},
+{
+"field": {
+"Name": "created_at_c"
+}
+},
+{
+"field": {
+"Name": "completed_at_c"
+}
+},
+{
+"field": {
+"Name": "order_c"
+}
+}
+],
         "where": [
           {
-            "FieldName": "category_id",
+"FieldName": "category_id_c",
             "Operator": "ExactMatch",
             "Values": [categoryId.toString()]
           }
         ]
       };
       
-      const response = await apperClient.fetchRecords('task', params);
+const response = await apperClient.fetchRecords('task_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -330,63 +406,73 @@ const taskService = {
   async search(query) {
     try {
       const params = {
-        "Fields": [
-          {
-            "Field": {
-              "Name": "Id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "title"
-            }
-          },
-          {
-            "Field": {
-              "Name": "completed"
-            }
-          },
-          {
-            "Field": {
-              "Name": "category_id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "priority"
-            }
-          },
-          {
-            "Field": {
-              "Name": "due_date"
-            }
-          },
-          {
-            "Field": {
-              "Name": "created_at"
-            }
-          },
-          {
-            "Field": {
-              "Name": "completed_at"
-            }
-          },
-          {
-            "Field": {
-              "Name": "order"
-            }
-          }
-        ],
+"fields": [
+{
+"field": {
+"Name": "Id"
+}
+},
+{
+"field": {
+"Name": "Name"
+}
+},
+{
+"field": {
+"Name": "Tags"
+}
+},
+{
+"field": {
+"Name": "title_c"
+}
+},
+{
+"field": {
+"Name": "completed_c"
+}
+},
+{
+"field": {
+"Name": "category_id_c"
+}
+},
+{
+"field": {
+"Name": "priority_c"
+}
+},
+{
+"field": {
+"Name": "due_date_c"
+}
+},
+{
+"field": {
+"Name": "created_at_c"
+}
+},
+{
+"field": {
+"Name": "completed_at_c"
+}
+},
+{
+"field": {
+"Name": "order_c"
+}
+}
+],
         "where": [
           {
-            "FieldName": "title",
+"FieldName": "title_c",
             "Operator": "Contains",
             "Values": [query]
           }
         ]
       };
       
-      const response = await apperClient.fetchRecords('task', params);
+const response = await apperClient.fetchRecords('task_c', params);
       
       if (!response.success) {
         console.error(response.message);

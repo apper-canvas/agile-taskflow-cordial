@@ -7,8 +7,8 @@ import CategoryButton from "@/components/molecules/CategoryButton";
 const Sidebar = ({ tasks, categories, selectedCategory, onSelectCategory, completionPercentage }) => {
     const { logout } = useContext(AuthContext);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const totalTasksCount = tasks.length;
-    const completedTasksCount = tasks.filter(t => t.completed).length;
+const totalTasksCount = tasks.length;
+const completedTasksCount = tasks.filter(t => t.completed_c || t.completed).length;
 
     const handleLogout = async () => {
         setIsLoggingOut(true);

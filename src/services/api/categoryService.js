@@ -9,36 +9,41 @@ const categoryService = {
   async getAll() {
     try {
       const params = {
-        "Fields": [
-          {
-            "Field": {
-              "Name": "Id"
-            }
-          },
-          {
-            "Field": {
-              "Name": "Name"
-            }
-          },
-          {
-            "Field": {
-              "Name": "color"
-            }
-          },
-          {
-            "Field": {
-              "Name": "task_count"
-            }
-          },
-          {
-            "Field": {
-              "Name": "order"
-            }
-          }
-        ]
+"fields": [
+{
+"field": {
+"Name": "Id"
+}
+},
+{
+"field": {
+"Name": "Name"
+}
+},
+{
+"field": {
+"Name": "Tags"
+}
+},
+{
+"field": {
+"Name": "color_c"
+}
+},
+{
+"field": {
+"Name": "task_count_c"
+}
+},
+{
+"field": {
+"Name": "order_c"
+}
+}
+]
       };
       
-      const response = await apperClient.fetchRecords('category', params);
+const response = await apperClient.fetchRecords('category_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -55,10 +60,41 @@ const categoryService = {
   async getById(id) {
     try {
       const params = {
-        fields: ['Id', 'Name', 'color', 'task_count', 'order']
+fields: [
+{
+"field": {
+"Name": "Id"
+}
+},
+{
+"field": {
+"Name": "Name"
+}
+},
+{
+"field": {
+"Name": "Tags"
+}
+},
+{
+"field": {
+"Name": "color_c"
+}
+},
+{
+"field": {
+"Name": "task_count_c"
+}
+},
+{
+"field": {
+"Name": "order_c"
+}
+}
+]
       };
       
-      const response = await apperClient.getRecordById('category', id, params);
+const response = await apperClient.getRecordById('category_c', id, params);
       
       if (!response.success) {
         console.error(response.message);
@@ -94,7 +130,7 @@ try {
         ]
       };
       
-      const response = await apperClient.createRecord('category', params);
+const response = await apperClient.createRecord('category_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -142,7 +178,7 @@ Id: parseInt(id),
         ]
       };
       
-      const response = await apperClient.updateRecord('category', params);
+const response = await apperClient.updateRecord('category_c', params);
       
       if (!response.success) {
         console.error(response.message);
@@ -174,7 +210,7 @@ Id: parseInt(id),
         RecordIds: [parseInt(id)]
       };
       
-      const response = await apperClient.deleteRecord('category', params);
+const response = await apperClient.deleteRecord('category_c', params);
       
       if (!response.success) {
         console.error(response.message);
