@@ -5,15 +5,14 @@ import Checkbox from '@/components/atoms/Checkbox';
 import Button from '@/components/atoms/Button';
 
 const TaskItem = ({ task, categories, onToggleComplete, onDelete, getPriorityColor, getCategoryColor, getDueDateDisplay, index }) => {
-const dueDateInfo = getDueDateDisplay(task.due_date_c || task.due_date || task.dueDate);
-    const categoryName = categories.find(c => 
-      (c.Id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString())) ||
-      (c.id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString()))
-    )?.Name || categories.find(c => 
-      (c.Id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString())) ||
-      (c.id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString()))
-    )?.name;
-
+  const dueDateInfo = getDueDateDisplay(task.due_date_c || task.due_date || task.dueDate);
+  const categoryName = categories.find(c => 
+    (c.Id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString())) ||
+    (c.id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString()))
+  )?.Name || categories.find(c => 
+    (c.Id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString())) ||
+    (c.id?.toString() === (task.category_id_c?.toString() || task.category_id?.toString() || task.categoryId?.toString()))
+  )?.name;
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -28,19 +27,18 @@ const dueDateInfo = getDueDateDisplay(task.due_date_c || task.due_date || task.d
             <div className="flex items-center space-x-4">
                 {/* Checkbox */}
 <Checkbox checked={task.completed_c || task.completed} onClick={() => onToggleComplete(task.Id || task.id, !(task.completed_c || task.completed))} />
-
                 {/* Task Content */}
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-3 mb-2">
 <h4 className={`text-sm font-medium ${
-(task.completed_c || task.completed) ? 'line-through text-gray-500' : 'text-gray-900'
-}`}>
-                            {task.title}
+                                (task.completed_c || task.completed) ? 'line-through text-gray-500' : 'text-gray-900'
+                            }`}>
+                                {task.title_c || task.title}
                         </h4>
                         
                         {/* Priority Badge */}
 <div className={`w-2 h-2 rounded-full ${getPriorityColor(task.priority_c || task.priority)} ${
-(task.priority_c || task.priority) === 'high' && !(task.completed_c || task.completed) ? 'animate-pulse-soft' : ''
+                            (task.priority_c || task.priority) === 'high' && !(task.completed_c || task.completed) ? 'animate-pulse-soft' : ''
                         }`} />
                     </div>
 

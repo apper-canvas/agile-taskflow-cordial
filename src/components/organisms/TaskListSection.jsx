@@ -59,10 +59,11 @@ const TaskListSection = ({
                         className="space-y-3"
 className="space-y-3"
                     >
-                        {filteredTasks.map((task, index) => (
+{filteredTasks.map((task, index) => (
                             <TaskItem
-                                key={task.id}
+                                key={task.Id || task.id}
                                 task={task}
+                                categories={categories}
                                 onToggleComplete={onToggleTaskComplete}
                                 onDelete={onDeleteTask}
                                 getPriorityColor={getPriorityColor}

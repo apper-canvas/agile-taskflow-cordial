@@ -70,14 +70,17 @@ const handleCreateTask = async (e) => {
     e.preventDefault();
     if (!newTask.title.trim()) return;
 
-try {
+    try {
       const task = await taskService.create({
-        ...newTask,
-        category_id_c: newTask.categoryId,
-        due_date_c: newTask.dueDate ? new Date(newTask.dueDate).toISOString() : null
+        title_c: newTask.title,
+        category_id_c: parseInt(newTask.categoryId),
+        priority_c: newTask.priority,
+        due_date_c: newTask.dueDate ? new Date(newTask.dueDate).toISOString() : null,
+        completed_c: false,
+        created_at_c: new Date().toISOString()
       });
       setTasks(prev => [...prev, task]);
-      setNewTask({ title: '', categoryId: 'work', priority: 'medium', dueDate: '' });
+      setNewTask({ title: '', categoryId: categories[0]?.Id || categories[0]?.id || '', priority: 'medium', dueDate: '' });
       setShowQuickAdd(false);
       toast.success('Task created successfully!');
     } catch (err) {
@@ -99,10 +102,10 @@ const handleDeleteTask = async (taskId) => {
     setNewTask(prev => ({ ...prev, [field]: value }));
 };
 
-  const getFilteredTasks = () => {
+const getFilteredTasks = () => {
     let filtered = tasks;
 
-if (selectedCategory !== 'all') {
+    if (selectedCategory !== 'all') {
       filtered = filtered.filter(task => 
         task.category_id_c?.toString() === selectedCategory || 
         task.category_id?.toString() === selectedCategory || 
@@ -112,7 +115,7 @@ if (selectedCategory !== 'all') {
 
     if (searchQuery) {
       filtered = filtered.filter(task => 
-        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+        (task.title_c || task.title || '').toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -141,7 +144,7 @@ if (selectedCategory !== 'all') {
 };
 
 const getCategoryColor = (categoryId) => {
-const category = categories.find(c => 
+    const category = categories.find(c => 
       (c.Id?.toString() || c.id?.toString()) === categoryId?.toString()
     );
     return category?.color_c || category?.color || '#5B4EE5';
